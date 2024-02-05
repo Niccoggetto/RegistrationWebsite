@@ -17,9 +17,10 @@ def submit_form():
     name = request.form['name']
     surname = request.form['surname']
     phone = request.form['phone']
+    paymentchoice = request.form['paymentchoice']
 
-    insert_data_query = "INSERT INTO people (name, surname, phone) VALUES (%s, %s, %s)"
-    people_data = (name, surname, str(phone))
+    insert_data_query = "INSERT INTO people (name, surname, phone, payment) VALUES (%s, %s, %s, %s)"
+    people_data = (name, surname, str(phone), paymentchoice)
     db.query(insert_data_query, people_data)
     return render_template('thanku.html')
 
