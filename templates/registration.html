@@ -85,33 +85,35 @@
         <br>
         <br>
            {% for cocktail in cocktails_list %}
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-            <label for="{{ cocktail.nome }}">{{ cocktail.nome }}</label>
-            <div style="display: flex; align-items: center;">
-                <button type="button" onclick="decrement('{{ cocktail.nome }}')">-</button>
-                <span id="{{ cocktail.nome }}Count">0</span>
-                <button type="button" onclick="increment('{{ cocktail.nome }}')">+</button>
-            </div>
-        </div>
-        {% endfor %}
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label>{{ cocktail.display }}</label>
+                    <div style="display: flex; align-items: center;">
+                        <button type="button" onclick="decrement('quantity_{{cocktail.nome}}')">-</button>
+                        <input id="quantity_{{cocktail.nome}}" type="number" min="0" max="10" value="0">
+                        <button type="button" onclick="increment('quantity_{{cocktail.nome}}')">+</button>
+                    </div>
+                </div>
+            {% endfor %}
+
         <input type="submit" value="Registra">
     </form>
 
     <script>
         function increment(cocktailName) {
-            var countElement = document.getElementById(cocktailName + 'Count');
-            var currentCount = parseInt(countElement.innerText);
-            countElement.innerText = currentCount + 1;
+            var countElement = document.getElementById(cocktailName);
+            var currentCount = parseInt(countElement.value);
+            countElement.value = currentCount + 1;
         }
 
         function decrement(cocktailName) {
-            var countElement = document.getElementById(cocktailName + 'Count');
-            var currentCount = parseInt(countElement.innerText);
+            var countElement = document.getElementById(cocktailName);
+            var currentCount = parseInt(countElement.value);
 
             if (currentCount > 0) {
-                countElement.innerText = currentCount - 1;
+                countElement.value = currentCount - 1;
             }
         }
     </script>
+
 </body>
 </html>
