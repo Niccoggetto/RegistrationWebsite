@@ -23,5 +23,6 @@ montenegro = Cocktail("montenegro", "montenegro", ["montenegro"], [0.15], [], []
 amaro_del_capo = Cocktail("amarodelcapo", "amaro del capo", ["amarodelcapo"], [0.15], [], [], 0)
 jagermeister = Cocktail("jagermeister", "jagermeister", ["jagermaister"], [0.1], [], [], 0)
 
-cocktails_list = [vodka_lemon, gin_tonic, gin_lemon, rum_cola, spritz, tequila, prosecco, montenegro, amaro_del_capo, jagermeister]
+cocktails_list = [vodka_lemon, gin_tonic, gin_lemon, rum_cola, spritz, tequila, prosecco, montenegro, amaro_del_capo,
+                  jagermeister]
 

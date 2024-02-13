@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 class Database:
     conn = None
 
@@ -9,6 +10,13 @@ class Database:
         self.host = '192.168.1.120'
         self.port = 3306
         self.database = 'eventmanager'
+
+    '''def __init__(self):
+        self.user = 'root'
+        self.password = ''
+        self.host = '127.0.0.1'
+        self.port = 3306
+        self.database = 'events' '''
 
     def connect(self):
         if not Database.conn or not Database.conn.is_connected():

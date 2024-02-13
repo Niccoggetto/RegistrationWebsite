@@ -4,63 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form di Registrazione</title>
+    <link rel="stylesheet" href="static/style.css">
 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif; /* Cambia il font come preferisci */
-            background-color: #DC143C; /* Cambia il colore di sfondo se desideri */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
 
-        h2 {
-            text-align: center;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        input[type="submit"] {
-            background-color: #808080;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #555555;
-        }
-        label{
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        select{
-            padding:10px;
-            width: 100%;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        button{
-
-        }
-
-    </style>
 </head>
 <body>
     <p></p>
@@ -73,6 +19,9 @@
         <input type="text" id="surname" name="surname" placeholder="Cognome" required>
         <br>
         <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Formato: 1234567890" required>
+        {% if errorr_message %}
+            <p style="color: red; max-width: 80%; max-width: 400px;">{{ errorr_message }}</p>
+        {% endif %}
         <br>
         <label for="paymentchoice">Come intendi pagare?</label>
         <br>
@@ -81,39 +30,53 @@
             <option value="paypal">Paypal</option>
             <option value="bonifico">Bonifico</option>
             <option value="tinaba">Tinaba</option>
+            <option value="satispay">Satispay</option>
         </select>
         <br>
         <br>
-           {% for cocktail in cocktails_list %}
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label>{{ cocktail.display }}</label>
-                    <div style="display: flex; align-items: center;">
-                        <button type="button" onclick="decrement('quantity_{{cocktail.nome}}')">-</button>
-                        <input id="quantity_{{cocktail.nome}}" type="number" min="0" max="10" value="0">
-                        <button type="button" onclick="increment('quantity_{{cocktail.nome}}')">+</button>
-                    </div>
-                </div>
-            {% endfor %}
 
-        <input type="submit" value="Registra">
-    </form>
+        {% for c in cocktails_list %}
+            <label>{{c.display}}</label>
+            <div class="input-group">
+                <button type="button" class="decrement">-</button>
+                <input type="number" class="inputqt" name={{c.nome}} id="{{c.nome}}inputqt" value="0" readonly>
+                <button type="button" class="increment">+</button>
+            </div>
+        {% endfor %}
+
+    <br>
+    <input type="submit" value="Registra">
 
     <script>
-        function increment(cocktailName) {
-            var countElement = document.getElementById(cocktailName);
-            var currentCount = parseInt(countElement.value);
-            countElement.value = currentCount + 1;
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const increments = document.querySelectorAll(".increment");
+            const decrements = document.querySelectorAll(".decrement");
+            const inputs = document.querySelectorAll(".inputqt");
 
-        function decrement(cocktailName) {
-            var countElement = document.getElementById(cocktailName);
-            var currentCount = parseInt(countElement.value);
-
-            if (currentCount > 0) {
-                countElement.value = currentCount - 1;
+            function increment(index) {
+                inputs[index].value++;
             }
-        }
+
+            function decrement(index) {
+                if (inputs[index].value > 0) {
+                    inputs[index].value--;
+                }
+            }
+
+            increments.forEach((inc, index) => {
+                inc.addEventListener("click", () => {
+                    increment(index);
+                });
+            });
+
+            decrements.forEach((dec, index) => {
+                dec.addEventListener("click", () => {
+                    decrement(index);
+                });
+            });
+        });
     </script>
 
+    </form>
 </body>
 </html>

@@ -9,6 +9,7 @@
             font-family: 'Arial', sans-serif;
             background-color: #ffdada;
             display: flex;
+            flex-direction: column; /* Imposta la direzione dei figli a colonna */
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -17,11 +18,35 @@
 
         h2 {
             text-align: center;
-            font-size: 3em; /* Cambia la dimensione del font come preferisci */
+            font-size: 44px;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <h2>THANK U</h2>
+    <br>
+    <br>
+    <br>
+
+    <div>
+        <h3>
+            {% if paymentchoice == 'tinaba' or paymentchoice == 'bonifico' %}
+                Per il pagamento segui il link qui sotto:
+                <a href="https://crowdfunding.tinaba.it/party-capodanno-cinese-2024" target="_blank">https://crowdfunding.tinaba.it/party-capodanno-cinese-2024</a>
+            {% elif paymentchoice == 'satispay' %}
+                Per il pagamento segui il link qui sotto:
+                <a href="https://www.satispay.com/app/match/link/user/S6Y-CON--2829863F-B4B6-4970-B8CD-1C9223D908E6?amount=2000&currency=EUR" target="_blank">https://www.satispay.com/app/match/link/user/S6Y-CON--2829863F-B4B6-4970-B8CD-1C9223D908E6?amount=2000&currency=EUR</a>
+            {% elif paymentchoice == 'paypal' %}
+                Per il pagamento segui il link qui sotto:
+                <a href="mailto:daniele.crippa.k@gmail.com">daniele.crippa.k@gmail.com</a>
+            {% endif %}
+        </h3>
+    </div>
+
 </body>
 </html>
